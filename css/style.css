@@ -88,3 +88,21 @@ h1 {
 .complete-btn:hover {
     background: #218838;
 }
+
+.delete-btn {
+    width: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0;
+    color: black;
+
+    i {
+        font-size: 1.1rem;
+    }
+}
+
+.delete-btn:hover {
+    color: red;
+}

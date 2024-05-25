@@ -13,13 +13,32 @@ document.addEventListener('DOMContentLoaded', function () {
     function createTaskElement(taskText) {
         const newTaskElement = document.createElement('li');
         newTaskElement.textContent = taskText;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
+        deleteButton.classList.add('delete-btn');
+        newTaskElement.appendChild(deleteButton);
+
+
+        deleteButton.addEventListener('click', function () {
+            deleteTask(newTaskElement, taskText);
+        });
+
         todoList.appendChild(newTaskElement);
+    }
+
+    function deleteTask(taskElement, taskText) {
+        todoList.removeChild(taskElement);
+
+        let savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        savedTasks = savedTasks.filter(task => task !== taskText);
+        localStorage.setItem('tasks', JSON.stringify(savedTasks));
     }
 
     loadTasks();
 
     todoForm.addEventListener('submit', function (event) {
-        event.preventDefault(); 
+        event.preventDefault();
 
         const newTaskText = todoInput.value.trim();
         if (newTaskText !== '') {
